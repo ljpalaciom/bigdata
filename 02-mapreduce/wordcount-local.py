@@ -24,7 +24,7 @@ def processdir(dir):
 
 def wordcountfile(f, wordcount):
 #    file=open(f,'r')
-    try:
+#    try:
         file = codecs.open(f, "r", "utf-8")
         for word in file.read().split():
             if word not in wordcount:
@@ -32,8 +32,8 @@ def wordcountfile(f, wordcount):
             else:
                 wordcount[word] += 1
         file.close()
-    except IOError, UnicodeDecodeError:
-        print("skip file utf-8 error",f)            
+#    except IOError, UnicodeDecodeError:
+#        print("skip file utf-8 error",f)            
     return wordcount        
 
 processdir(inputdir)
