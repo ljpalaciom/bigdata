@@ -39,3 +39,21 @@ Copiar todos los archivos del [datasets](datasets) tanto en S3 (permanente) y en
 
 * ver: [HDFS](01-hdfs)
 
+## 3. Bases de datos Hive y motor de transferencia de datos Sqoop
+
+Este laboratorio lo debe realizar en Amazon EMR.
+
+tiene 2 partes:
+
+parte1: 
+* crear base de datos, crear tablas 'hdi' y 'wordcount'
+* realizar consultas  SQL
+* transferir datos vía Sqoop de la base de datos:'cursodb' y tabla: 'employee'
+
+parte2:
+* realizar el caso de estudio retail_db
+* implica crear base de datos Amazon RDS/Mysql, cargar los datos del dataset a la base de datos.
+* seguir las instrucciones del [case_retail.sql](../03-hive-sqoop/case_retail.sql)
+* Ver la presentación de clase donde esta la descripción del caso
+
+ver: [HIVE-SQOOP](03-hive-sqoop)
