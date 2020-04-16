@@ -93,7 +93,10 @@ usar los datos en 'datasets' de este repositorio.
 
 ```
 use mydb;
-CREATE TABLE EXPO (country STRING, expct FLOAT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE LOCATION '/user/<username>/datasets/onu/export-data.csv';
+CREATE EXTERNAL TABLE EXPO (country STRING, expct FLOAT) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE 
+LOCATION 's3://<bucketname>/datasets/onu/export/'
 ```
 
 ### EJECUTAR EL JOIN DE 2 TABLAS:
@@ -105,18 +108,26 @@ SELECT h.country, gni, expct FROM HDI h JOIN EXPO e ON (h.country = e.country) W
 ## 4. WORDCOUNT EN HIVE:
 ```
 use <MYDB>;
-CREATE EXTERNAL TABLE docs (line STRING) STORED AS TEXTFILE LOCATION '/user/<username>/datasets/gutenberg-small/';
+CREATE EXTERNAL TABLE docs (line STRING) 
+STORED AS TEXTFILE 
+LOCATION '/user/<username>/datasets/gutenberg-small/';
 --- alternativa2:
-CREATE EXTERNAL TABLE docs (line STRING) STORED AS TEXTFILE LOCATION 's3://emontoyapublic/datasets/gutenberg-small/';
+CREATE EXTERNAL TABLE docs (line STRING) 
+STORED AS TEXTFILE 
+LOCATION 's3://<<bucketname>>/datasets/gutenberg-small/';
 ```
 
 // ordenado por palabra
 ```
-SELECT word, count(1) AS count FROM (SELECT explode(split(line,' ')) AS word FROM docs) w GROUP BY word ORDER BY word DESC LIMIT 10;
+SELECT word, count(1) AS count FROM (SELECT explode(split(line,' ')) AS word FROM docs) w 
+GROUP BY word 
+ORDER BY word DESC LIMIT 10;
 ```
 // ordenado por frecuencia de menor a mayor
 ```
-SELECT word, count(1) AS count FROM (SELECT explode(split(line,' ')) AS word FROM docs) w GROUP BY word ORDER BY count DESC LIMIT 10;
+SELECT word, count(1) AS count FROM (SELECT explode(split(line,' ')) AS word FROM docs) w 
+GROUP BY word 
+ORDER BY count DESC LIMIT 10;
 ```
 
 ### RETO:
@@ -131,6 +142,8 @@ sqoop-hue-settings [settings-emr.txt](../00-aws/settings-emr.txt)
 
 ## Datos en MySQL (crear previamente la base de datos en Amazon RDS/MySql)
 
+scripts para gestionar y crear las tablas de 'cursosdb' y 'retail_db': [scripts-rdbms](../rdbms/)
+
 ```
 En database-1.cj1yhistqein.us-east-2.rds.amazonaws.com, se tiene Mysql con:
 Base de datos: “cursodb”
@@ -139,6 +152,8 @@ User: curso/curso
 $ mysql –u curso -h database-1.cj1yhistqein.us-east-2.rds.amazonaws.com –p
 Enter password: ******
 mysql> use cursodb;
+mysql> show tables;
+
 
 Base de datos: “retail_db”
 Tabla: <varias>
@@ -146,11 +161,27 @@ User: retail_dba/retail_dba
 $ mysql –u retail_dba -h database-1.cj1yhistqein.us-east-2.rds.amazonaws.com –p
 Enter password: ******
 mysql> use retail_db;
+mysql> show tables;
+
 
 
 ```
+## comandos Sqoop desde Hue
 
-## Comandos Sqoop
+conectarse a HUE, Menu: Query / Sqoop 1
+
+todos los comandos no incluye 'sqoop'
+
+import --connect jdbc:mysql://database-1.cj1yhistqein.us-east-2.rds.amazonaws.com:3306/cursodb 
+--username curso --password curso 
+--table employee 
+--target-dir /user/<username>/mysqlOut -m 1
+
+## Comandos Sqoop desde CLI
+
+### ejecute el comando beeline desde el nodo master del cluster EMR o de hadoop (DCA):
+
+$ beeline
 
 //Transferir datos de una base de datos (tipo mysql) hacia HDFS:
 ```
