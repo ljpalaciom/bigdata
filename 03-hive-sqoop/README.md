@@ -58,14 +58,14 @@ use mydb;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 STORED AS TEXTFILE 
-LOCATION '/user/<username>/datasets/onu/hdi/
+LOCATION '/user/<username>/datasets/onu/hdi/'
 
 # tabla externa en S3: 
 use mydb;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 STORED AS TEXTFILE 
-LOCATION 's3://<bucketname>/datasets/onu/hdi/
+LOCATION 's3://<bucketname>/datasets/onu/hdi/'
 
 ```
 
