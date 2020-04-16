@@ -110,7 +110,8 @@ SELECT h.country, gni, expct FROM HDI h JOIN EXPO e ON (h.country = e.country) W
 use <MYDB>;
 CREATE EXTERNAL TABLE docs (line STRING) 
 STORED AS TEXTFILE 
-LOCATION '/user/<username>/datasets/gutenberg-small/';
+LOCATION 'hdfs://localhost/user/<username>/datasets/gutenberg-small/';
+
 --- alternativa2:
 CREATE EXTERNAL TABLE docs (line STRING) 
 STORED AS TEXTFILE 
