@@ -36,8 +36,37 @@ Usuarios: (entrar como admin/St026320201* y crear cada uno su usuario)
 
 ### Crear la tabla HDI en Hive:
 ```
+# tabla manejada por hive: /user/hive/warehouse
 use mydb;
-CREATE TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE LOCATION '/user/<username>/datasets/onu/hdi-data.csv';
+CREATE TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
+ROW FORMAT DELIMITED FIELDS 
+TERMINATED BY ','
+
+# se requiere cargar datos a la tabla asi:
+#
+# copiando datos directamente hacia hdfs:///user/hive/warehouse/mydb.db/hdi
+
+$ hdfs dfs -cp hdfs:///user/emontoya/datasets/onu/hdi-data.csv hdfs:///hive/warehouse/mydb.db/hdi
+
+#
+# cargardo datos desde hive:
+
+$ load data inpath '/user/emontoya/datasets/onu/hdi-data.csv' into table HDI
+
+# tabla externa en hdfs: 
+use mydb;
+CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE 
+LOCATION '/user/<username>/datasets/onu/hdi/
+
+# tabla externa en S3: 
+use mydb;
+CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE 
+LOCATION 's3://<bucketname>/datasets/onu/hdi/
+
 ```
 
 Nota: Esta tabla la crea en una BASE DE DATOS 'mydb'
