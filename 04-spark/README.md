@@ -78,3 +78,38 @@ Cree un Notebook:
 
 * notebook: [Data_processing_using_PySpark.ipynb](Data_processing_using_PySpark.ipynb)
 * datos ejemplo: [sample_data.csv](../datasets/spark/sample_data.csv)
+
+### Manejo de notebooks en EMR
+
+* varias opciones:
+
+** a través del servicio jupyterhub como componente de EMR
+** Notebooks como servicio de amazon para EMR (opción a trabajar)
+
+Para trabajar con los notebooks gestionados por amazon, la gestión de paquetes, versión de python puede ser consultado en:
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-scoped-libraries.html
+
+* Opciones importantes:
+
+** cambiar versión de python:
+
+%%configure -f
+{ "conf":{
+"spark.pyspark.python": "python3",
+"spark.pyspark.virtualenv.enabled": "true",
+"spark.pyspark.virtualenv.type":"native",
+"spark.pyspark.virtualenv.bin.path":"/usr/bin/virtualenv"
+}}
+
+** Example – Listing Current Libraries
+
+sc.list_packages()
+
+** Example – Installing the NLTK Library
+
+sc.install_pypi_package("nltk")
+
+** Example – Uninstalling a Library
+
+sc.uninstall_package("nltk")
