@@ -7,7 +7,7 @@
 
 ### Trabajo individual, opcionalmente se puede trabajar entre 2 alumnos MÁXIMO.
 
-# realizar analisis exploratorio de datos sobre UNO de los datasets de:
+# realizar analisis exploratorio de datos sobre datasets de COVID-19:
 
 ## 1. Fuentes de datos
 
