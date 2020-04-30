@@ -94,22 +94,22 @@ https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-sco
 
 ** cambiar versión de python:
 
-%%configure -f
-{ "conf":{
-"spark.pyspark.python": "python3",
-"spark.pyspark.virtualenv.enabled": "true",
-"spark.pyspark.virtualenv.type":"native",
-"spark.pyspark.virtualenv.bin.path":"/usr/bin/virtualenv"
-}}
+    %%configure -f
+    { "conf":{
+    "spark.pyspark.python": "python3",
+    "spark.pyspark.virtualenv.enabled": "true",
+    "spark.pyspark.virtualenv.type":"native",
+    "spark.pyspark.virtualenv.bin.path":"/usr/bin/virtualenv"
+    }}
 
 ** Example – Listing Current Libraries
 
-sc.list_packages()
+    sc.list_packages()
 
 ** Example – Installing the NLTK Library
 
-sc.install_pypi_package("nltk")
+    sc.install_pypi_package("nltk")
 
 ** Example – Uninstalling a Library
 
-sc.uninstall_package("nltk")
+    sc.uninstall_package("nltk")
