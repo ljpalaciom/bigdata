@@ -34,7 +34,7 @@
 
 ## 3. Desde Zeppelin Nodebook:
 
-Entre desde un browser a: http://<ip-or-name-amazon-host>:9995 o el servidor que le desigen para el lab
+Entre desde un browser a: http://ip-or-name-amazon-host:9995 o el servidor que le desigen para el lab
 
 ![login](zeppelin-login.png)
 
