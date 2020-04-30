@@ -83,12 +83,12 @@ Cree un Notebook:
 
 * varias opciones:
 
-** a través del servicio jupyterhub como componente de EMR
-** Notebooks como servicio de amazon para EMR (opción a trabajar)
+    ** a través del servicio jupyterhub como componente de EMR
+    ** Notebooks como servicio de amazon para EMR (opción a trabajar)
 
 Para trabajar con los notebooks gestionados por amazon, la gestión de paquetes, versión de python puede ser consultado en:
 
-https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-scoped-libraries.html
+    https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-scoped-libraries.html
 
 * Opciones importantes:
 
